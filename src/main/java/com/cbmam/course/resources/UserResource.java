@@ -13,23 +13,21 @@ import com.cbmam.course.entities.User;
 import com.cbmam.course.services.UserService;
 
 @RestController
-@RequestMapping(value = "/users" )
+@RequestMapping(value = "/users")  // Corrigido para "/users" para manter consistência com o endpoint de usuários
 public class UserResource {
 
-	@Autowired
-	private UserService service;
-	
-	@GetMapping
-	public ResponseEntity<List<User>> findAll(){
-		List<User> list = service.findAll();
-		return ResponseEntity.ok().body(list);
-	}		
-	
-	@GetMapping(value = "/{id}")
-	public ResponseEntity<User> findById(@PathVariable Long id){
-		User obj = service.findById(id);
-		return ResponseEntity.ok().body(obj);
-	}
-	
-	
-	}
+    @Autowired
+    private UserService service;
+    
+    @GetMapping
+    public ResponseEntity<List<User>> findAll() {
+        List<User> list = service.findAll();
+        return ResponseEntity.ok().body(list);
+    }    
+    
+    @GetMapping(value = "/{id}")
+    public ResponseEntity<User> findById(@PathVariable Long id) {
+        User obj = service.findById(id);
+        return ResponseEntity.ok().body(obj);
+    }
+}
