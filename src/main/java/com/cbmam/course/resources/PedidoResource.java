@@ -9,27 +9,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cbmam.course.entities.Order;
-import com.cbmam.course.services.OrderService;
+import com.cbmam.course.entities.Pedido;
+import com.cbmam.course.services.PedidoService;
 
 @RestController
-@RequestMapping(value = "/orders" )
-public class OrderResource {
+@RequestMapping(value = "/pedidos")
+public class PedidoResource {
 
 	@Autowired
-	private OrderService service;
+	private PedidoService service;
 	
 	@GetMapping
-	public ResponseEntity<List<Order>> findAll(){
-		List<Order> list = service.findAll();
+	public ResponseEntity<List<Pedido>> buscarTodos(){
+		List<Pedido> list = service.buscarTodos();
 		return ResponseEntity.ok().body(list);
 	}		
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<Order> findById(@PathVariable Long id){
-		Order obj = service.findById(id);
+	public ResponseEntity<Pedido> buscarPorId(@PathVariable Long id){
+		Pedido obj = service.buscarPorId(id);
 		return ResponseEntity.ok().body(obj);
 	}
-	
-	
-	}
+}

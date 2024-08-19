@@ -9,25 +9,25 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.cbmam.course.entities.User;
-import com.cbmam.course.services.UserService;
+import com.cbmam.course.entities.Usuario;
+import com.cbmam.course.services.UsuarioService;
 
 @RestController
-@RequestMapping(value = "/users")  // Corrigido para "/users" para manter consistência com o endpoint de usuários
-public class UserResource {
+@RequestMapping(value = "/usuarios")
+public class UsuarioResource {
 
     @Autowired
-    private UserService service;
+    private UsuarioService service;
     
     @GetMapping
-    public ResponseEntity<List<User>> findAll() {
-        List<User> list = service.findAll();
+    public ResponseEntity<List<Usuario>> buscarTodos() {
+        List<Usuario> list = service.buscarTodos();
         return ResponseEntity.ok().body(list);
     }    
     
     @GetMapping(value = "/{id}")
-    public ResponseEntity<User> findById(@PathVariable Long id) {
-        User obj = service.findById(id);
+    public ResponseEntity<Usuario> buscarPorId(@PathVariable Long id) {
+        Usuario obj = service.buscarPorId(id);
         return ResponseEntity.ok().body(obj);
     }
 }
