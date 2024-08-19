@@ -12,16 +12,15 @@ import com.cbmam.course.repositories.PedidoRepository;
 @Service
 public class PedidoService {
 
-	@Autowired
-	private PedidoRepository repositorio;
-	
-	public List<Pedido> buscarTodos(){
-		return repositorio.findAll();
-	}
-	
-	public Pedido buscarPorId(Long id) {
-		Optional<Pedido> obj = repositorio.findById(id);
-		return obj.get();
-	}
-	
+    @Autowired
+    private PedidoRepository repositorio;
+
+    public List<Pedido> buscarTodos() {
+        return repositorio.findAll();
+    }
+
+    public Pedido buscarPorId(Long id) {
+        Optional<Pedido> obj = repositorio.findById(id);
+        return obj.orElseThrow(() -> new RuntimeException("Pedido não encontrado com o id: " + id));
+    }
 }
