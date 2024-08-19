@@ -10,12 +10,14 @@ import org.springframework.context.annotation.Profile;
 
 import com.cbmam.course.entities.Categoria;
 import com.cbmam.course.entities.ItemDoPedido;
+import com.cbmam.course.entities.Pagamento;
 import com.cbmam.course.entities.Pedido;
 import com.cbmam.course.entities.Produto;
 import com.cbmam.course.entities.Usuario;
 import com.cbmam.course.entities.enums.StatusPedido;
 import com.cbmam.course.repositories.CategoriaRepository;
 import com.cbmam.course.repositories.ItemDoPedidoRepository;
+import com.cbmam.course.repositories.PagamentoRepository;
 import com.cbmam.course.repositories.PedidoRepository;
 import com.cbmam.course.repositories.ProdutoRepository;
 import com.cbmam.course.repositories.UsuarioRepository;
@@ -38,6 +40,9 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
 	private ItemDoPedidoRepository itemDoPedidoRepository;
+	
+	@Autowired
+    private PagamentoRepository pagamentoRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -83,7 +88,9 @@ public class TestConfig implements CommandLineRunner {
 		
 		itemDoPedidoRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
 		
-
+		Pagamento pay1 = new Pagamento(null, Instant.parse("2019-07-21T21:42:10Z"),o2 );
+		o2.setPagamento(pay1);
 		
+		pedidoRepository.save(o2);
 	}
 }
