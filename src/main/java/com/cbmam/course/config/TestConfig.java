@@ -9,11 +9,13 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
 import com.cbmam.course.entities.Categoria;
+import com.cbmam.course.entities.ItemDoPedido;
 import com.cbmam.course.entities.Pedido;
 import com.cbmam.course.entities.Produto;
 import com.cbmam.course.entities.Usuario;
 import com.cbmam.course.entities.enums.StatusPedido;
 import com.cbmam.course.repositories.CategoriaRepository;
+import com.cbmam.course.repositories.ItemDoPedidoRepository;
 import com.cbmam.course.repositories.PedidoRepository;
 import com.cbmam.course.repositories.ProdutoRepository;
 import com.cbmam.course.repositories.UsuarioRepository;
@@ -33,6 +35,9 @@ public class TestConfig implements CommandLineRunner {
 	
 	@Autowired
 	private ProdutoRepository produtoRepository;
+	
+	@Autowired
+	private ItemDoPedidoRepository itemDoPedidoRepository;
 
 	@Override
 	public void run(String... args) throws Exception {
@@ -70,5 +75,15 @@ public class TestConfig implements CommandLineRunner {
 		p5.getCategorias().add(cat2);
 		
 		produtoRepository.saveAll(Arrays.asList(p1, p2, p3, p4, p5));
+	
+		ItemDoPedido oi1 = new ItemDoPedido(o1, p1, 2, p1.getPreco());
+		ItemDoPedido oi2 = new ItemDoPedido(o1, p3, 1, p3.getPreco());
+		ItemDoPedido oi3 = new ItemDoPedido(o2, p3, 2, p3.getPreco());
+		ItemDoPedido oi4 = new ItemDoPedido(o3, p5, 2, p5.getPreco());
+		
+		itemDoPedidoRepository.saveAll(Arrays.asList(oi1,oi2,oi3,oi4));
+		
+
+		
 	}
 }
